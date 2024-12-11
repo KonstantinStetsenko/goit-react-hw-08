@@ -1,0 +1,6 @@
+.boxList {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
