@@ -1,11 +1,14 @@
 .ContactForm {
   display: flex;
   flex-direction: column;
-
   width: 300px;
-  border: 1px solid black;
+  height: 1000px;
+  border: 1px;
+
   border-radius: 6px;
   padding: 15px;
+  background-color: rgb(139, 139, 139);
+  margin-right: 20px;
 }
 .button {
   margin-top: 20px;

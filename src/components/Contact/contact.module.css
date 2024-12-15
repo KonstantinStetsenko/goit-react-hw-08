@@ -1,11 +1,14 @@
 .cardContact {
   display: flex;
   justify-content: space-between;
-  border: 2px solid black;
+  border: 0px solid black;
   border-radius: 8px;
-  width: 300px;
+  width: 500px;
   padding: 10px;
   align-items: center;
+  background-color: rgb(241, 241, 241);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1),
+    0 8px 16px rgba(0, 0, 0, 0.1);
 }
 .buttonDel {
   display: flex;
@@ -27,5 +30,9 @@
 .formContact {
   display: flex;
   flex-direction: column;
+  gap: 14px;
+}
+.containerButton {
+  display: flex;
   gap: 14px;
 }

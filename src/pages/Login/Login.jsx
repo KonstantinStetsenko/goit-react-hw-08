@@ -1,9 +1,13 @@
-import LoginForm from "../../components/Login/LoginForm"
+import { ToastContainer } from "react-toastify";
+import LoginForm from "../../components/Login/LoginForm";
 
 const Login = () => {
-    return (
-        <div><LoginForm/></div>
-    )
-}
+  return (
+    <div>
+      <ToastContainer />
+      <LoginForm />
+    </div>
+  );
+};
 
-export default Login
+export default Login;

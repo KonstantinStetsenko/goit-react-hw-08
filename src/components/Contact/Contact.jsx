@@ -1,9 +1,22 @@
 import React from "react";
-import styles from './contact.module.css';
 import { FaUser } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
+import { useDispatch } from "react-redux";
+import { openDeleteModal, openEditModal } from "../../redux/contacts/slice";
+import css from "./contact.module.css";
 
-const Contact = ({ name, phone, id, onDelete }) => {
+import styles from "./contact.module.css";
+
+const Contact = ({ name, phone, id }) => {
+  const dispatch = useDispatch();
+
+  const handleDelete = () => { dispatch(openDeleteModal(id)) };
+
+  const handleEdit = () => {
+    dispatch(openEditModal(id));
+  };
+
+
   return (
     <div className={styles.cardContact}>
       <div className={styles.formContact}>
@@ -16,12 +29,14 @@ const Contact = ({ name, phone, id, onDelete }) => {
           {phone}
         </div>
       </div>
-      <button
-        className={styles.buttonDel}
-        onClick={() => onDelete(id)}
-      >
-        Delete
-      </button>
+      <div className={css.containerButton}>
+        <button className={styles.buttonDel} onClick={handleDelete}>
+          Delete
+        </button>
+        <button className={styles.buttonDel} onClick={handleEdit}>
+          Edit
+        </button>
+      </div>
     </div>
   );
 };

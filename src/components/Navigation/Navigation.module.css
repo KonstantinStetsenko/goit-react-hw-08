@@ -1,0 +1,13 @@
+.listMenu {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
+.listItem {
+  font-size: 22px;
+  list-style-type: none;
+  font-weight: 500;
+  color: white;
+  text-transform: uppercase;
+  text-decoration: white;
+}

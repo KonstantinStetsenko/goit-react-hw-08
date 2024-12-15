@@ -1,55 +1,38 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import Layout from "./components/Layout";
+import PrivateRoute from "./components/PrivateRoute";
+import RestrictedRoute from "./components/RestrictedRoute";
 import Contacts from "./pages/Contacts/Contacts";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
-import { addContact, deleteContact, fetchContacts } from "./redux/contactsOps";
-import { selectNameFilter } from "./redux/filtersSlice";
+import { refreshUser } from "./redux/auth/operations";
+import { selectIsRefreshing } from "./redux/auth/selectors";
+import { fetchContacts } from "./redux/contacts/operations";
 
 function App() {
   const dispatch = useDispatch();
+  const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
     dispatch(fetchContacts());
+    dispatch(refreshUser());
   }, [dispatch]);
 
-  const { loading } = useSelector((state) => state.contacts.contacts);
-  const contacts = useSelector((state) => state.contacts.contacts.items || []);
-  const filter = useSelector(selectNameFilter);
-
-  const handleAddContact = (newContact) => {
-    dispatch(addContact(newContact));
-  };
-
-  const handleDeleteContact = (id) => {
-    dispatch(deleteContact(id));
-  };
-
-  const filteredContacts = contacts.filter((contact) =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
-  );
-
-  return (
+  return isRefreshing ? <div>Loading...</div>:(
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="/contacts" element={<Contacts />} />
+        <Route path="/contacts" element={<PrivateRoute><Contacts /></PrivateRoute>} />
+        
       </Route>
-      <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<RestrictedRoute component={<Register />} redirectTo="/contacts"/>} />
+      <Route path="/login" element={<RestrictedRoute component={<Login />} redirectTo="/contacts"/>} />
     </Routes>
-
-    /* // <div>
-    //   <h1>Phonebook</h1>
-    //   <ContactForm onAdd={handleAddContact} />
-    //   <SearchBox /> 
-    //   {loading&&<h2>Loading.....</h2>}
-    //   <ContactList users={filteredContacts} onDelete={handleDeleteContact} /> 
-    // </div> */
   );
 }
 

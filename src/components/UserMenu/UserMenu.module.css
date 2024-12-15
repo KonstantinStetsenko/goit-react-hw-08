@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.name {
+  margin-right: 16px;
+}
+
+.logoutButton {
+  color: white !important;
+  border-color: #ffffff !important;
+  text-transform: none;
+}
